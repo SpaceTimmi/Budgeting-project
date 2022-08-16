@@ -29,6 +29,7 @@
 				</ul>
 			</div>
 		</div>
+        <ul id="userList"></ul>
         <div id="userDetail">
             <p>
                 Name :
@@ -45,9 +46,10 @@
         </div>
 	</div>
     <!--Firebase SDK set up-->
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-database-compat.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -63,7 +65,7 @@
         };
       
         // Initialize Firebase
-        const firebase = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
     </script>
     <!--End firebase SDK set up-->
 	<script type="text/javascript" src="index.js"></script>
