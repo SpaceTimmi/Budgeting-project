@@ -12,9 +12,6 @@
 		<div class="row">
 			<div class="intro col-12">
 				<h1>Budgeting</h1>
-				<div>
-					<div class="border1"></div>
-				</div>
 			</div>
 		</div>
 
@@ -32,8 +29,43 @@
 				</ul>
 			</div>
 		</div>
-
+        <div id="userDetail">
+            <p>
+                Name :
+                <strong class="detailName"></strong>
+            </p>
+            <p>
+                Age:
+                <strong class="detailAge"></strong>
+            </p>
+            <p>
+                Email:
+                <strong class="detailEmail"></strong>
+            </p>
+        </div>
 	</div>
+    <!--Firebase SDK set up-->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCvBCntJmyFl_tMVG8-qc_DtHYRHuS614Q",
+          authDomain: "budgeting-project-d8c3a.firebaseapp.com",
+          projectId: "budgeting-project-d8c3a",
+          storageBucket: "budgeting-project-d8c3a.appspot.com",
+          messagingSenderId: "663497749464",
+          appId: "1:663497749464:web:a299aa8454f988635eb8ad",
+          databaseURL: "https://budgeting-project-d8c3a-default-rtdb.firebaseio.com"
+        };
+      
+        // Initialize Firebase
+        const firebase = initializeApp(firebaseConfig);
+    </script>
+    <!--End firebase SDK set up-->
 	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
