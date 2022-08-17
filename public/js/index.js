@@ -2,18 +2,7 @@ let enterButton = document.getElementById("enter");
 let input = document.getElementById("userInput");
 let ul = document.querySelector("ul");
 let item = document.getElementsByTagName("li");
-const firebaseConfig = {
-  apiKey: "AIzaSyCvBCntJmyFl_tMVG8-qc_DtHYRHuS614Q",
-  authDomain: "budgeting-project-d8c3a.firebaseapp.com",
-  projectId: "budgeting-project-d8c3a",
-  storageBucket: "budgeting-project-d8c3a.appspot.com",
-  messagingSenderId: "663497749464",
-  appId: "1:663497749464:web:a299aa8454f988635eb8ad",
-  databaseURL: "https://budgeting-project-d8c3a-default-rtdb.firebaseio.com",
-};
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 const dbRef = firebase.database().ref();
 const usersRef = dbRef.child("users");
 
@@ -46,7 +35,9 @@ function createListElement() {
   ul.appendChild(li); //adds li to ul
   input.value = ""; //Reset text input field
 }
-
+function inputLength(){
+	return input.value.length;
+}
 function addListAfterClick() {
   if (inputLength() > 0) {
     //makes sure that an empty input field doesn't create a li
