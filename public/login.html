@@ -18,31 +18,38 @@
         <!-- end of introduction text-->
 
         <!-- start of login form -->
-        <form class="login-form">
-            <legend class="" id="">Login</legend>
+        <div class="login-form">
+            <legend id="">Login</legend>
             <!-- start of username field -->
-            <div class="">
-                <label for="userName-or-email">Username or Email</label>
-                <input class="" id="" type="text" name="userName-or-email"> 
+            <div>
+                <label for="userName-or-email">Email</label>
+                <input id="email" type="text" placeholder="Email"> 
             </div>
             <!-- end of username field -->
 
             <!-- start of password field -->
-            <div class="">
+            <div>
                 <label for="userPassword">Password</label>
+                <input id="password" type="text" placeholder="password">
                 <button class="" type="">Hide</button>
-                <input class="" id="" type="password" name="userPassword">
             </div>
             <!-- end of password field -->
 
             <!-- submit button -->
-            <div class="">
-                <button class="" type="submit">Login</button>
+            <div>
+                <button id="submit">Login</button>
             </div>
-        </form>
+        </div>
         <!-- end of login form -->
 
     </div>
-    <script type="text/javascript" src=""></script>
+    
+    <!--Firebase SDK set up-->
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-auth-compat.js"></script>
+    <script src="js/setup_firebase.js"></script>
+    <!--End firebase SDK set up-->
+    <script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>
