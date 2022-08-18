@@ -31,8 +31,8 @@ function createUser() {
 function meetsCriteria() {
     if (userName.value.length === 0) {
         alert("Please enter your username!");
-    } else if (email.value.length === 0) {
-        alert("Please enter your email account!");
+    } else if (!validateMail(email.value)) {
+        alert("Please enter a valid email account!");
     } else if (password.value.length < 8 || password2.value < 8) {
         alert("Passwords must be atleast 8 characters long!");
     } else if (password.value !== password2.value) {
@@ -41,6 +41,15 @@ function meetsCriteria() {
         createUser();
     } 
 }
+
+function validateMail(mail) {
+  const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+  if (mail.match(mailFormat)) {
+    return true;
+  }
+  return false;
+}
+
 submitButton.addEventListener("click", meetsCriteria);
 
 hideBtn.addEventListener("click", () => {
