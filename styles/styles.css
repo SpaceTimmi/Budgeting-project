@@ -1,3 +1,24 @@
+body {
+    justify-content: center;
+    display: grid;   
+}
+
 button {
     width:fit-content;
+}
+
+.login-form{
+    align-items: center;
+    display: inline-grid;
+    justify-content: center;
+}
+
+.input-field {
+    border-radius: 10px;
+    padding: 5px;
+    margin: 2px;
+}
+
+#email{
+    margin-left:2.55vh;
 }
