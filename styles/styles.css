@@ -1,3 +1,9 @@
+/*
+=============================================
+Sign Up and Login Page
+=============================================
+*/ 
+
 body {
     justify-content: center;
     display: grid;   
@@ -21,4 +27,18 @@ button {
 
 #email{
     margin-left:2.55vh;
+}
+
+/* experimental */
+.personalizedLabel {
+    text-transform: capitalize;
+    font-size: small;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 0%;
+    margin-top: 0.88rem;
+}
+
+.hide-btn-container {
+    margin-left: auto;
 }
