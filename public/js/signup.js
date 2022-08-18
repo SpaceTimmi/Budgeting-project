@@ -6,7 +6,7 @@ let password = document.getElementById("userPassword");
 
 
 
-function creatUser() {
+function createUser() {
   //create new user.
   const auth = firebase.auth();
   firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
@@ -35,7 +35,7 @@ function meetsCriteria() {
     } else if (password.value.length < 8) {
         alert("Passwords must be atleast 8 characters long!");
     } else {
-        creatUser();
+        createUser();
     } 
 }
 submitButton.addEventListener("click", meetsCriteria);
