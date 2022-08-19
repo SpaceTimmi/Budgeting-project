@@ -7,8 +7,9 @@ Sign Up and Login Page
 body {
     justify-content: center;
     display: grid;   
+    padding-top:5vh;
+    margin:0;
 }
-
 button {
     width:fit-content;
 }
@@ -42,3 +43,41 @@ button {
 .hide-btn-container {
     margin-left: auto;
 }
+
+.top {
+    top: 0;
+    position:absolute;
+    width:100%;
+}
+.siteName {
+    font-size:25px;
+}
+.navBar {
+    display:flex;
+    justify-content: space-between;
+    background-color: #d4b8ffeb;
+    max-height: 5vh;
+}
+
+.navElement {
+    text-align: center;
+    padding: 1vh;
+    margin-left:10px
+}
+
+
+.navText {
+    font-size:20px;
+    text-decoration-line: none;
+    color: black;
+}
+
+.navText:hover {
+    color:grey;
+    cursor: pointer;
+}
+
+.navLinks {
+    display:flex;
+}
+
