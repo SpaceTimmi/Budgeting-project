@@ -1,5 +1,3 @@
-/*
-
 let enterButton = document.getElementById("enter");
 let input = document.getElementById("userInput");
 let ul = document.querySelector("ul");
@@ -56,6 +54,5 @@ function addListAfterKeypress(event) {
 }
 
 enterButton.addEventListener("click", addListAfterClick);
-input.addEventListener("keypress", addListAfterKeypress);
 
-*/
+input.addEventListener("keypress", addListAfterKeypress);
