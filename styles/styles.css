@@ -1,5 +1,5 @@
 /*
-==============================================
+=============================================
 Sign Up and Login Page
 =============================================
 */ 
@@ -44,6 +44,11 @@ button {
     margin-left: auto;
 }
 
+/*
+=============================================
+Navigation 
+=============================================
+*/
 .top {
     top: 0;
     position:absolute;
@@ -81,3 +86,41 @@ button {
     display:flex;
 }
 
+/*
+=============================================
+Footer
+=============================================
+*/
+
+/* Large Screens */
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+    background-color:  #d4b8ffeb;
+    bottom: 0;
+    width: 100vw;
+    margin-top: 2rem;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+
+.footer-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+}
+
+.footer-container > p > a, 
+.footer-nav-links {
+    text-decoration: none;
+    font-size: small; 
+    font-style: italic;
+}
+
+.footer-container > p > a:hover, 
+.footer-nav-links:hover {
+    color: black;
+}
+
+/* Small Screens */
