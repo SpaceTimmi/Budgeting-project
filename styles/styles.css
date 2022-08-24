@@ -1,22 +1,52 @@
 /*
-==============================================
-Sign Up and Login Page
 =============================================
-*/ 
+General
+=============================================
+*/
 
 body {
-    justify-content: center;
     display: grid;   
+    justify-content: center;
     padding-top:5vh;
     margin:0;
 }
+
 button {
     width:fit-content;
 }
 
-.login-form{
-    align-items: center;
+.large-btn {
+    display: inline-block;
+    background-color: green;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.large-btn:focus {
+    outline: none;
+}
+
+.large-btn:active {
+    transform: scale(0.98);
+}
+
+
+
+/*
+=============================================
+Sign Up and Login Page
+=============================================
+*/ 
+
+.login-form {
     display: inline-grid;
+    align-items: center;
     justify-content: center;
 }
 
@@ -44,6 +74,11 @@ button {
     margin-left: auto;
 }
 
+/*
+=============================================
+Navigation 
+=============================================
+*/
 .top {
     top: 0;
     position:absolute;
@@ -81,3 +116,64 @@ button {
     display:flex;
 }
 
+/*
+=============================================
+Footer
+=============================================
+*/
+
+/* Large Screens */
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    background-color:  #d4b8ffeb;
+    margin-top: 2rem;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+
+.footer-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+}
+
+.footer-container > p > a, 
+.footer-nav-links {
+    text-decoration: none;
+    font-size: small; 
+    font-style: italic;
+}
+
+.footer-container > p > a:hover, 
+.footer-nav-links:hover {
+    color: black;
+}
+
+.built-by{
+    padding-left:10px;
+}
+
+#logo {
+    font-size: medium;
+}
+
+/* Small Screens */
+
+@media screen and (max-width:1000px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem 0.5rem;
+    }
+
+}

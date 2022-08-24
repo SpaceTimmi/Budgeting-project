@@ -2,7 +2,25 @@ let enterButton = document.getElementById("enter");
 let input = document.getElementById("userInput");
 let ul = document.querySelector("ul");
 let item = document.getElementsByTagName("li");
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    console.log(user);
+  }
+  else{
 
+  }
+})
+function writeUserData(userId, name, email, imageUrl) {
+  firebase
+    .database()
+    .ref("users/" + userId)
+    .set({
+      username: name,
+      email: email,
+      profile_picture: imageUrl,
+    });
+}
 const dbRef = firebase.database().ref();
 const usersRef = dbRef.child("users");
 
@@ -35,8 +53,8 @@ function createListElement() {
   ul.appendChild(li); //adds li to ul
   input.value = ""; //Reset text input field
 }
-function inputLength(){
-	return input.value.length;
+function inputLength() {
+  return input.value.length;
 }
 function addListAfterClick() {
   if (inputLength() > 0) {
