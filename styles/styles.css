@@ -1,22 +1,29 @@
 /*
 =============================================
-Sign Up and Login Page
+General
 =============================================
-*/ 
+*/
 
 body {
-    justify-content: center;
     display: grid;   
+    justify-content: center;
     padding-top:5vh;
     margin:0;
 }
+
 button {
     width:fit-content;
 }
 
-.login-form{
-    align-items: center;
+/*
+=============================================
+Sign Up and Login Page
+=============================================
+*/ 
+
+.login-form {
     display: inline-grid;
+    align-items: center;
     justify-content: center;
 }
 
@@ -97,9 +104,9 @@ Footer
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     position: absolute;
-    background-color:  #d4b8ffeb;
     bottom: 0;
     width: 100vw;
+    background-color:  #d4b8ffeb;
     margin-top: 2rem;
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
@@ -127,4 +134,23 @@ Footer
     padding-left:10px;
 }
 
+#logo {
+    font-size: medium;
+}
+
 /* Small Screens */
+
+@media screen and (max-width:1000px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem 0.5rem;
+    }
+
+}
