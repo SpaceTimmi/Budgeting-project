@@ -2,34 +2,17 @@ let enterButton = document.getElementById("enter");
 let input = document.getElementById("userInput");
 let ul = document.querySelector("ul");
 let item = document.getElementsByTagName("li");
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    console.log(user);
-  }
-  else{
 
-  }
-})
-function writeUserData(userId, name, email, imageUrl) {
-  firebase
-    .database()
-    .ref("users/" + userId)
-    .set({
-      username: name,
-      email: email,
-      profile_picture: imageUrl,
-    });
-}
 const dbRef = firebase.database().ref();
 const usersRef = dbRef.child("users");
 
+// sample write data
 // start test to list users
 const userListUI = document.getElementById("userList");
 usersRef.on("child_added", (snap) => {
   let user = snap.val();
   let $li = document.createElement("li");
-  $li.innerHTML = user.name;
+  $li.innerHTML = user.displayName;
   $li.setAttribute("child-key", snap.key);
   $li.addEventListener("click", userClicked);
   userListUI.append($li);
@@ -47,19 +30,31 @@ function userClicked(e) {
 }
 // end test to list user
 
-function createListElement() {
-  let li = document.createElement("li"); // creates an element "li"
-  li.appendChild(document.createTextNode(input.value)); //makes text from input field the li text
-  ul.appendChild(li); //adds li to ul
-  input.value = ""; //Reset text input field
+// start test write to db
+function writeToDb() {
+  let today = new Date();
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log(user)
+      let entryRef = firebase.database().ref('sample_entry/' + user.uid);
+      entryRef.push().set({ // entryRef.push() generates a new unique ID for each new entry
+        user: user.displayName,
+        date: today.toISOString(),
+        description: input.value,
+      });
+      
+      input.value = ""; //Reset text input field
+    }
+  })
 }
-function inputLength() {
-  return input.value.length;
+// end test write to db
+function inputLength(){
+	return input.value.length;
 }
 function addListAfterClick() {
   if (inputLength() > 0) {
     //makes sure that an empty input field doesn't create a li
-    createListElement();
+    writeToDb();
   }
 }
 
@@ -67,7 +62,7 @@ function addListAfterKeypress(event) {
   if (inputLength() > 0 && event.which === 13) {
     //this now looks to see if you hit "enter"/"return"
     //the 13 is the enter key's keycode, this could also be display by event.keyCode === 13
-    createListElement();
+    writeToDb();
   }
 }
 
