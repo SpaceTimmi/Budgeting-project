@@ -177,3 +177,15 @@ Footer
     }
 
 }
+
+/*
+=============================================
+Entry Form
+=============================================
+*/
+.entry-container {
+    margin: 30px auto;
+    border: 1px solid green;
+    padding: 30px;
+    border-radius: 5px;
+}
