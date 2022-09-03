@@ -1,3 +1,5 @@
+/*
+
 let enterButton = document.getElementById("enter");
 let input = document.getElementById("userInput");
 let ul = document.querySelector("ul");
@@ -17,6 +19,7 @@ usersRef.on("child_added", (snap) => {
   $li.addEventListener("click", userClicked);
   userListUI.append($li);
 });
+
 function userClicked(e) {
   var userID = e.target.getAttribute("child-key");
   const userRef = dbRef.child("users/" + userID);
@@ -66,6 +69,75 @@ function addListAfterKeypress(event) {
   }
 }
 
+
+
 enterButton.addEventListener("click", addListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeypress);
+*/
+
+/*======================================================*/
+
+// Wrting to budget entry 
+// Getting Inputs
+const amount = document.getElementById("amount");
+const category = document.getElementById("category");
+const description = document.getElementById("description");
+const type = document.getElementById("type");
+const submitBtn = document.getElementById("add-btn");
+
+function writeToBudgetEntry() {
+  // When called this function writes to budget_entry.
+  let today = new Date();
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      let budgetRef = firebase.database().ref("budget_entry/" + user.uid);
+      budgetRef.push().set({
+        amount: amount.value,
+        category: category.value,
+        date: today.toISOString(),
+        description: description.value,
+        type: type.value,
+      });
+      // Reset input tags
+      amount.value = "";
+      category.value = "";
+      description.value = "";
+      type.value = "";  
+    } 
+  });
+
+}
+
+//Event Listeners.
+
+submitBtn.addEventListener("click", () => {
+  // Event listener for the submit button 
+  // If the submit button is clicked and all inputs have been filled then it submits inputs to firebase.
+  if (verifyInputs()) {
+    writeToBudgetEntry();
+  } else {
+    alert("Please fill the form properly before clicking submit.")
+  }
+});
+
+document.querySelectorAll(".entryInput").forEach(item => {
+  // Event listner for input tags. 
+  // If the return/enter (while cursor is on the input) key is pressed and all inputs have been filled then it submits inputs to firebase.
+  item.addEventListener("keypress", (event) => {
+    if(verifyInputs() && event.which === 13) {
+      writeToBudgetEntry();
+    }
+  });
+})
+
+
+//Helper function
+function verifyInputs() {
+  // Returns true if all inputs have been filled, false otherwise.
+  let arr = [amount, category, description, type];
+  let check = arr.reduce((acc, input) => {
+      return acc && (input && input.value);
+  }, true);
+  return check 
+}
