@@ -35,29 +35,31 @@
         </div>
         <!-- end of introduction text-->
 
-        <!-- start of login form -->
+        <!-- start of signup form -->
         <div class="login-form">
-            <!-- start of username field -->
-            <div>
-                <label for="userName-or-email">Email</label>
-                <input class="input-field" id="email" type="text" placeholder="Email"> 
+            <!-- start of email field-->
+            <div class="">
+                <p class="personalizedLabel">Email</p>
+                <input class="input-field" id="email" type="email" placeholder="Email">
             </div>
-            <!-- end of username field -->
+            <!-- end of email field-->
 
             <!-- start of password field -->
-            <div>
-                <label for="userPassword">Password</label>
-                <input class="input-field" id="password" type="text" placeholder="password">
+            <div class="">
+                <p class="personalizedLabel">Password</p>
+                <input class="input-field" id="password" type="password" name="userPassword" placeholder="Password">
+            </div>
+            <div class="hide-btn-container">
                 <button id="hide-btn">hide</button>
             </div>
-            <!-- end of password field -->
-
+            <!-- start of password field -->
+            
             <!-- submit button -->
-            <div>
-                <button id="submit" class="large-btn">Login</button>
+            <div class="">
+                <button id="getStarted" class="large-btn" type="submit">Login</button>
             </div>
         </div>
-        <!-- end of login form -->
+        <!-- end of signup form -->
     </div>
     
      <footer class="footer-container">

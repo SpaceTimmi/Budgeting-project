@@ -51,13 +51,10 @@ Sign Up and Login Page
 }
 
 .input-field {
-    border-radius: 10px;
+    border:none;
+    border-bottom:solid thin;
     padding: 5px;
     margin: 2px;
-}
-
-#email{
-    margin-left:2.55vh;
 }
 
 /* experimental */
