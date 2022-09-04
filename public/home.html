@@ -12,6 +12,7 @@
     <!--End firebase SDK set up-->
     <link rel="stylesheet" href="./styles/styles.css"/>
     <link rel="stylesheet" href="./styles/dropdown.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
@@ -31,6 +32,7 @@
 		<div class="row">
 			<div class="intro col-12">
 				<h1>Budgeting</h1>
+                <button id="getStarted" class="large-btn" onclick="openForm()">Add new entry...</button>
 			</div>
 		</div>
         <!--
@@ -63,10 +65,10 @@
             </p>
         </div>
         -->
-        <div class="entry-container">
+        <div class="entry-container" id="entry-form">
             <div>
                 <p>Amount</p>
-                <input class="entryInput" id="amount" type="number" placeholder="Enter amout">
+                <input class="entryInput" id="amount" type="number" placeholder="Enter amount">
             </div>
             <div>
                 <p>Category</p>
@@ -77,14 +79,19 @@
                 <input class="entryInput" id="description" type="text" placeholder="Enter description">
             </div>
             <div>
-                <p>Type</p>
-                <input class="entryInput" id="type" type="text" placeholder="Enter type">
+                <p>Income/Expense</p>
+                <select class="entryInput" id="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
             </div>
             <div>
                 <button class="large-btn" id="add-btn">Add</button>
+                <button class="large-btn" id="cancel-btn" style="background-color:red" onclick="closeForm()">Cancel</button>
             </div>
         </div>
 	</div>
+    
      <footer class="footer-container">
         <p class="built-by">
             &copy; <span id="date">2022</span>

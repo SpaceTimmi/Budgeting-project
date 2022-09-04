@@ -77,7 +77,13 @@ input.addEventListener("keypress", addListAfterKeypress);
 */
 
 /*======================================================*/
+function openForm() {
+  document.getElementById("entry-form").style.display = "block";
+}
 
+function closeForm() {
+  document.getElementById("entry-form").style.display = "none";
+}
 // Wrting to budget entry 
 // Getting Inputs
 const amount = document.getElementById("amount");
