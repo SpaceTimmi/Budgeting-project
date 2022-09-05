@@ -10,7 +10,11 @@ body {
     padding-top:5vh;
     margin:0;
 }
-
+.main-content{
+    justify-content: center;
+    display: flex;
+    text-align: center;
+}
 button {
     width:fit-content;
 }
@@ -181,8 +185,12 @@ Entry Form
 =============================================
 */
 .entry-container {
-    margin: 30px auto;
+    display: none;
     border: 1px solid green;
+    position: absolute;
+    background-color: white;
     padding: 30px;
     border-radius: 5px;
+    text-align: left;
+    margin-top:5px;
 }
