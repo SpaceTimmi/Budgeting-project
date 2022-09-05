@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Firebase SDK set up-->
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-database-compat.js"></script>
+    <script src="js/setup_firebase.js"></script>
+    <!--End firebase SDK set up-->
+    <link rel="stylesheet" href="./styles/styles.css"/>
+    <link rel="stylesheet" href="./styles/dropdown.css"/>
+    <title>About</title>
+</head>
+<body>
+    <!-- topNavBar -->
+    <div class="top">
+        <div class="navBar row">
+            <div class="col navElement siteName">Placeholder</div>
+            <div class="col navLinks">
+                <div class="col navElement" id="home"><a href="home.html" class="navText">Home</a></div>
+                <div class="col navElement" id="about"><a href="about.html" class="navText">About</a></div>
+                <div class="col navElement dropdown" id="login-state"></div>
+                <script src="js/loginState.js"></script>
+            </div>
+        </div>
+    </div>
+	<div class="container main-content">
+       <div class="sub-container"> 
+            <div class="text-container">
+                <h3>About</h3>
+                <p>lorem ipsum dolor sit amet consectetur, adipisicing elit. nam repellendus exercitationem sunt quia, minus voluptatem magni perferendis possimus eligendi assumenda amet earum doloremque dolore voluptas odio nobis itaque explicabo excepturi!</p>
+                <br>
+                <p>lorem ipsum dolor, sit amet consectetur adipisicing elit. tempore quos eligendi animi voluptates dolores modi facilis nulla sapiente asperiores aut reiciendis cum voluptate dolor ullam, magnam ex in repudiandae temporibus et atque iusto harum quaerat. temporibus iure a qui delectus, id velit dolorem, molestias asperiores facere in voluptatum, corrupti officiis.</p>
+            </div>
+            <form class="contact-form">
+                    <legend class="contact-form-label">Contact Form</legend>
+                    <div>
+                        <label for="email-address">Email</label>
+                        <input class="form-input" type="email" id="email" name="email-address">
+                    </div>
+                    <div>
+                        <label for="message">Message</label>
+                        <textarea class="form-textarea" id="message" name="message" row="50" cols="50"></textarea> 
+                    </div>
+                    <div>
+                        <button class="btn" type="submit">submit</button>
+                    </div>
+            </form>
+        </div>
+    </div>    
+    <!-- start of footer-->
+    <footer class="footer-container">
+        <p class="built-by">
+            &copy; <span id="date">2022</span>
+            <a href="home.html" id="logo">BudgetPlanner</a> 
+            built by <a href="https://github.com/vy-b">Cola</a> and 
+            <a href="https://github.com/spacetimmi">SpaceTimmi</a>
+        </p>
+        <div class="footer-nav">
+            <a href="home.html" class="footer-nav-links">Home</a>
+            <a href="login.html" class="footer-nav-links">Log In</a>
+            <a href="signup.html" class="footer-nav-links">Sign Up</a>
+            <a href="about.html" class="footer-nav-links">About</a>
+        </div>
+    </footer>
+    <!-- end of footer-->
+	<script type="text/javascript" src="js/about.js"></script>
+</body>
+</html>

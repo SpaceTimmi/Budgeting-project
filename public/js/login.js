@@ -39,7 +39,6 @@ function fieldsNotEmpty() {
   return true;
 }
 
-submitButton.addEventListener("click", signIn);
 
 password.addEventListener("keypress", signInAfterKeypress);
 hideBtn.addEventListener("click", () => {
