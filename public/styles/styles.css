@@ -15,6 +15,10 @@ body {
     display: flex;
     text-align: center;
 }
+
+.container {
+    display: inline-block;
+}
 button {
     width:fit-content;
 }
@@ -194,3 +198,9 @@ Entry Form
     text-align: left;
     margin-top:5px;
 }
+
+/*
+=============================================
+About page
+=============================================
+*/
