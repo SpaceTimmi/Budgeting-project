@@ -19,6 +19,15 @@ body {
 .container {
     display: inline-block;
 }
+
+
+
+/*
+=============================================
+Buttons
+=============================================
+*/
+
 button {
     width:fit-content;
 }
@@ -36,7 +45,6 @@ button {
     font-size: 15px;
 }
 
-/*   */
 #hide-btn {
    display: inline-block;
    cursor: pointer;
@@ -47,32 +55,6 @@ button {
    background-color: green;
 }
 
-#intro-- {
-    font-style: italic;
-}
-
-.raise-box {
-    padding: 10px;
-    border: 1px solid green;
-    box-shadow:  -1px 1px green,
-         -2px 2px green,
-         -3px 3px green,
-         -4px 4px green,
-         -5px 5px green;
-}
-
-#title {
-    display: flex;
-    justify-content: center;
-    color: green;
-    font-style: italic;
-    font-weight: 900;
-}
-
-
-
-/*   */
-
 .large-btn:focus {
     outline: none;
 }
@@ -82,12 +64,19 @@ button {
 }
 
 
+.hide-btn-container {
+    margin-left: auto;
+}
+
+
+
 /*
 =============================================
 Sign Up and Login Page
 =============================================
 */ 
 
+/* Large Screens */
 .login-form {
     display: inline-grid;
     align-items: center;
@@ -112,9 +101,29 @@ Sign Up and Login Page
     margin-top: 0.88rem;
 }
 
-.hide-btn-container {
-    margin-left: auto;
+
+#intro-- {
+    font-style: italic;
 }
+
+.raise-box {
+    padding: 10px;
+    border: 1px solid green;
+    box-shadow:  -1px 1px green,
+         -2px 2px green,
+         -3px 3px green,
+         -4px 4px green,
+         -5px 5px green;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    color: green;
+    font-style: italic;
+    font-weight: 900;
+}
+
 
 .sub-container {
     margin-top: 1rem; 
@@ -123,12 +132,16 @@ Sign Up and Login Page
     border-radius: 2rem;
 }
 
+/* Small Screens */
+
+
 
 /*
 =============================================
 Navigation 
 =============================================
 */
+
 .top {
     top: 0;
     position:absolute;
@@ -227,6 +240,8 @@ Footer
 
 }
 
+
+
 /*
 =============================================
 Entry Form
@@ -242,6 +257,8 @@ Entry Form
     text-align: left;
     margin-top:5px;
 }
+
+
 
 /*
 =============================================
