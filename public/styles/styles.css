@@ -36,6 +36,43 @@ button {
     font-size: 15px;
 }
 
+/*   */
+#hide-btn {
+   display: inline-block;
+   cursor: pointer;
+   text-decoration: none;
+   color: white;
+   border-radius: 5px;
+   padding: 0 0.3rem;
+   background-color: green;
+}
+
+#intro-- {
+    font-style: italic;
+}
+
+.raise-box {
+    padding: 10px;
+    border: 1px solid green;
+    box-shadow:  -1px 1px green,
+         -2px 2px green,
+         -3px 3px green,
+         -4px 4px green,
+         -5px 5px green;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    color: green;
+    font-style: italic;
+    font-weight: 900;
+}
+
+
+
+/*   */
+
 .large-btn:focus {
     outline: none;
 }
@@ -43,7 +80,6 @@ button {
 .large-btn:active {
     transform: scale(0.98);
 }
-
 
 
 /*
@@ -63,9 +99,10 @@ Sign Up and Login Page
     border-bottom:solid thin;
     padding: 5px;
     margin: 2px;
+    /* */
+    width: 400px ;
 }
 
-/* experimental */
 .personalizedLabel {
     text-transform: capitalize;
     font-size: small;
@@ -78,6 +115,14 @@ Sign Up and Login Page
 .hide-btn-container {
     margin-left: auto;
 }
+
+.sub-container {
+    margin-top: 1rem; 
+    padding: 2rem 4rem;
+    border: 2px solid green;
+    border-radius: 2rem;
+}
+
 
 /*
 =============================================
@@ -95,7 +140,7 @@ Navigation
 .navBar {
     display:flex;
     justify-content: space-between;
-    background-color: #d4b8ffeb;
+    background-color: lightgreen;
     max-height: 5vh;
 }
 
@@ -134,10 +179,9 @@ Footer
     position: absolute;
     bottom: 0;
     width: 100vw;
-    background-color:  #d4b8ffeb;
+    background-color: lightgreen;
     margin-top: 2rem;
-    border-top: 2px solid gray;
-    border-bottom: 2px solid gray;
+    border-top: 2px solid green ;
 }
 
 .footer-nav {

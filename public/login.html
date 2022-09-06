@@ -12,7 +12,7 @@
     <!--End firebase SDK set up-->
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" href="./styles/dropdown.css">
-    <title>Login Page</title>
+    <title>Log into BudgetPlanner</title>
 </head>
 <body>
     <!-- topNavBar -->
@@ -28,38 +28,41 @@
         </div>
     </div>
     <div class="container ">
-        <h1>Login Page</h1>
-        <!-- start of introduction text-->
-        <div class="" id="intro--">
-            <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
-        </div>
-        <!-- end of introduction text-->
+        <h3 id ="title">BudgetPlanner</h3>
+        <div class="sub-container raise-box">
+            <!-- start of introduction text-->
+            <div class="" id="intro--">
+                <p>Log into your BudgetPlanner account.</p>
+                <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
+            </div>
+            <!-- end of introduction text-->
 
-        <!-- start of signup form -->
-        <div class="login-form">
+            <!-- start of signup form -->
+            <form class="login-form">
             <!-- start of email field-->
-            <div class="">
-                <p class="personalizedLabel">Email</p>
-                <input class="input-field" id="email" type="email" placeholder="Email">
-            </div>
-            <!-- end of email field-->
+                <div>
+                    <p class="personalizedLabel">Email</p>
+                    <input class="input-field" id="email" type="email" placeholder="Email">
+                </div>
+                <!-- end of email field-->
 
-            <!-- start of password field -->
-            <div class="">
-                <p class="personalizedLabel">Password</p>
-                <input class="input-field" id="password" type="password" name="userPassword" placeholder="Password">
-            </div>
-            <div class="hide-btn-container">
-                <button id="hide-btn">hide</button>
-            </div>
-            <!-- start of password field -->
+                <!-- start of password field -->
+                <div>
+                    <p class="personalizedLabel">Password</p>
+                    <input class="input-field" id="password" type="password" name="userPassword" placeholder="Password">
+                </div>
+                <div class="hide-btn-container">
+                    <button id="hide-btn">hide</button>
+                </div>
+                <!-- start of password field -->
             
-            <!-- submit button -->
-            <div class="">
-                <button id="getStarted" class="large-btn" type="submit">Login</button>
-            </div>
-        </div>
+                <!-- submit button -->
+                <div>
+                    <button id="getStarted" class="large-btn" type="submit">Login</button>
+                </div>
+            </form>
         <!-- end of signup form -->
+        </div>
     </div>
     
      <footer class="footer-container">
