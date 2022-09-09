@@ -1,4 +1,4 @@
-let submitButton = document.getElementById("submit");
+let submitButton = document.getElementById("getStarted");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let hideBtn = document.getElementById("hide-btn");
@@ -14,7 +14,6 @@ function signIn() {
     // Signed in
     let user = userCredential.user;
     console.log(user);
-    window.location.href = './index.html';
     // ...
   })
   .catch((error) => {
@@ -40,15 +39,14 @@ function fieldsNotEmpty() {
 }
 
 
+submitButton.addEventListener("click",signIn);
 password.addEventListener("keypress", signInAfterKeypress);
 hideBtn.addEventListener("click", () => {
   if (hideBtn.textContent === 'hide') {
     hideBtn.textContent = 'show';
     password.type = "password";
-    password2.type = "password";
   } else {
     hideBtn.textContent = 'hide';
     password.type = "text";
-    password2.type = "text";
   }
 });

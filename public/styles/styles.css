@@ -30,7 +30,7 @@ body {
     align-self: flex-end;
     margin: 0.9375rem;
 }
-.inner-switch {
+#inner-switch {
     display: inline-block;
     cursor: pointer;
     border: 1px solid #555;
@@ -205,6 +205,13 @@ Navigation
     color:black;
 }
 
+#logout-btn {
+    background-color: white;
+}
+#username{
+    background-color: #97CADB;
+    color:black;
+}
 /*
 =============================================
 Footer
@@ -289,13 +296,24 @@ Entry Form
     display: none;
     border: 1px solid #97CADB;
     position: absolute;
-    background-color: white;
+    transform: translateX(-50%);
+    left: 50%;
     padding: 30px;
     border-radius: 5px;
     text-align: left;
-    margin-top:5px;
 }
 
+/* .entry-title{
+    background-color: white;
+}
+
+.entryInput{
+    background-color: white;
+}
+
+.entry-item{
+    background-color: white;
+} */
 
 
 /*

@@ -30,7 +30,7 @@ function createUser() {
       let errorCode = error.code;
       let errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      alert(errorMessage);
+      alert(error)
       // ..
     });
 }
@@ -61,6 +61,7 @@ function validateMail(mail) {
 submitButton.addEventListener("click", meetsCriteria);
 
 hideBtn.addEventListener("click", () => {
+  console.log("????")
   if (hideBtn.textContent === "hide") {
     hideBtn.textContent = "show";
     password.type = "password";
