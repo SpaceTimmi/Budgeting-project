@@ -296,6 +296,8 @@ Entry Form
     display: none;
     border: 1px solid #97CADB;
     position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
     background-color: white;
     padding: 30px;
     border-radius: 5px;

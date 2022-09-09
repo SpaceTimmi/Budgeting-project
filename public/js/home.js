@@ -67,10 +67,11 @@ firebase.auth().onAuthStateChanged((user) => {
   const entryListUI = document.getElementById("entryList");
   entriesRef.on("child_added", snap => {
     let entry = snap.val();
-    let $div = document.createElement("div");
+    let $entrycard = document.createElement("div");
     var date = new Date(entry.date);
-    $div.innerHTML = date.toLocaleDateString();
-    $div.setAttribute("child-key", snap.key);
+    $entrycard.innerHTML = date.toLocaleDateString();
+    $entrycard.setAttribute("child-key", snap.key);
+    $entrycard.setAttribute('class', 'card');
     // $li.addEventListener("click", entryClicked) 
     entryListUI.append($div);
 });
