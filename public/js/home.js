@@ -1,115 +1,33 @@
-/*
 
-let enterButton = document.getElementById("enter");
-let input = document.getElementById("userInput");
-let ul = document.querySelector("ul");
-let item = document.getElementsByTagName("li");
-
-const dbRef = firebase.database().ref();
-const usersRef = dbRef.child("users");
-
-// sample write data
-
-
-// start test write to db
-function writeToDb() {
-  let today = new Date();
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log(user)
-      let entryRef = firebase.database().ref('sample_entry/' + user.uid);
-      entryRef.push().set({ // entryRef.push() generates a new unique ID for each new entry
-        user: user.displayName,
-        date: today.toISOString(),
-        description: input.value,
-      });
-      
-      input.value = ""; //Reset text input field
-    }
-  })
-}
-// end test write to db
-function inputLength(){
-	return input.value.length;
-}
-function addListAfterClick() {
-  if (inputLength() > 0) {
-    //makes sure that an empty input field doesn't create a li
-    writeToDb();
-  }
-}
-
-function addListAfterKeypress(event) {
-  if (inputLength() > 0 && event.which === 13) {
-    //this now looks to see if you hit "enter"/"return"
-    //the 13 is the enter key's keycode, this could also be display by event.keyCode === 13
-    writeToDb();
-  }
-}
-
-
-
-enterButton.addEventListener("click", addListAfterClick);
-
-input.addEventListener("keypress", addListAfterKeypress);
-*/
-
-/*======================================================*/
 // start test to list users
 firebase.auth().onAuthStateChanged((user) => {
   const entriesRef = firebase.database().ref("budget_entry/"+user.uid);
   console.log(entriesRef)
-  entriesRef.on('value', (snapshot) => {
-    const data = snapshot.val();
-    console.log(data);
-    
-  });
   const entryListUI = document.getElementById("entryList");
   entriesRef.on("child_added", snap => {
     let entry = snap.val();
     let $entrycard = document.createElement("div");
     var date = new Date(entry.date);
-    $entrycard.innerHTML = date.toLocaleDateString();
+    $entrycard.innerHTML = date.toLocaleDateString() + " " + entry.type + " category: " + entry.category + " desc: " + entry.description + " amount: " + entry.amount;
     $entrycard.setAttribute("child-key", snap.key);
-    $entrycard.setAttribute('class', 'card');
-    // $li.addEventListener("click", entryClicked) 
-    entryListUI.append($div);
+    
+    $entrycard.addEventListener("click", entryClicked) 
+    entryListUI.append($entrycard);
 });
-  // entriesRef.get().then((snapshot) => {
-  //   if (snapshot.exists()) {
-  //     console.log(snapshot.val());
-  //   } else {
-  //     console.log("No data available");
-  //   }
-  // }).catch((error) => {
-  //   console.error(error);
-  // });
-  // console.log(entriesRef);
-  // const entryListUI = document.getElementById("entryList");
-  // console.log(entryListUI)
-  // entriesRef.on("child_added", (snap) => {
-  //   let entry = snap.val();
-  //   let $li = document.createElement("li");
-  //   $li.innerHTML = entry.displayName;
-  //   $li.setAttribute("child-key", snap.key);
-  //   entryListUI.append($li);
-  // });
+
+function entryClicked(e) {
+  var entryId = e.target.getAttribute("child-key");
+  const entryRef = entriesRef.child(entryId);
+  const $entryDesc = document.createElement("div");
+  userDetailUI.innerHTML = "";
+  userRef.on("child_added", (snap) => {
+    var $p = document.createElement("p");
+    $p.innerHTML = snap.key + " - " + snap.val();
+    userDetailUI.append($p);
+  });
+}
 })
 
-
-
-// function userClicked(e) {
-//   var userID = e.target.getAttribute("child-key");
-//   const userRef = dbRef.child("users/" + userID);
-//   const userDetailUI = document.getElementById("userDetail");
-//   userDetailUI.innerHTML = "";
-//   userRef.on("child_added", (snap) => {
-//     var $p = document.createElement("p");
-//     $p.innerHTML = snap.key + " - " + snap.val();
-//     userDetailUI.append($p);
-//   });
-// }
-// end test to list user
 
 function openForm() {
   document.getElementById("entry-form").style.display = "block";
@@ -156,6 +74,7 @@ submitBtn.addEventListener("click", () => {
   // If the submit button is clicked and all inputs have been filled then it submits inputs to firebase.
   if (verifyInputs()) {
     writeToBudgetEntry();
+    closeForm();
   } else {
     alert("Please fill the form properly before clicking submit.")
   }
