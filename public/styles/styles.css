@@ -19,8 +19,28 @@ body {
 .container {
     display: inline-block;
 }
+.dark,
+.dark * {
+    background-color: #001B48;
+    color: #D6E8EE;
+    border-color: #D6E8EE;
+}
 
-
+.switch {
+    align-self: flex-end;
+    margin: 0.9375rem;
+}
+.inner-switch {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #555;
+    border-radius: 1.25rem;
+    width: 3.125rem;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.1875rem;
+    margin-left: 0.3125rem;
+}
 
 /*
 =============================================
@@ -34,8 +54,8 @@ button {
 
 .large-btn {
     display: inline-block;
-    background-color: green;
-    color: #fff;
+    background-color: #97CADB;
+    color: white;
     border: none;
     padding: 10px 20px;
     margin: 5px;
@@ -52,7 +72,7 @@ button {
    color: white;
    border-radius: 5px;
    padding: 0 0.3rem;
-   background-color: green;
+   background-color: #97CADB;
 }
 
 .large-btn:focus {
@@ -108,18 +128,18 @@ Sign Up and Login Page
 
 .raise-box {
     padding: 10px;
-    border: 1px solid green;
-    box-shadow:  -1px 1px green,
-         -2px 2px green,
-         -3px 3px green,
-         -4px 4px green,
-         -5px 5px green;
+    border: 1px solid #97CADB;
+    box-shadow:  -1px 1px #97CADB,
+         -2px 2px #97CADB,
+         -3px 3px #97CADB,
+         -4px 4px #97CADB,
+         -5px 5px #97CADB;
 }
 
 #title {
     display: flex;
     justify-content: center;
-    color: green;
+    color: #018ABE;
     font-style: italic;
     font-weight: 900;
 }
@@ -128,7 +148,7 @@ Sign Up and Login Page
 .sub-container {
     margin-top: 1rem; 
     padding: 2rem 4rem;
-    border: 2px solid green;
+    border: 2px solid #97CADB;
     border-radius: 2rem;
 }
 
@@ -153,14 +173,17 @@ Navigation
 .navBar {
     display:flex;
     justify-content: space-between;
-    background-color: lightgreen;
+    background-color: #97CADB;
+    color:black;
     max-height: 5vh;
 }
 
 .navElement {
     text-align: center;
     padding: 1vh;
-    margin-left:10px
+    margin-left:10px;
+    background-color: #97CADB;
+    color:black;
 }
 
 
@@ -168,6 +191,7 @@ Navigation
     font-size:20px;
     text-decoration-line: none;
     color: black;
+    background-color: #97CADB;
 }
 
 .navText:hover {
@@ -177,6 +201,8 @@ Navigation
 
 .navLinks {
     display:flex;
+    background-color: #97CADB;
+    color:black;
 }
 
 /*
@@ -192,15 +218,18 @@ Footer
     position: absolute;
     bottom: 0;
     width: 100vw;
-    background-color: lightgreen;
+    background-color: #97CADB;
+    color:black;
     margin-top: 2rem;
-    border-top: 2px solid green ;
+    border-top: 2px solid #97CADB ;
 }
 
 .footer-nav {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
+    background-color: #97CADB;
+    color:black;
 }
 
 .footer-container > p > a, 
@@ -208,6 +237,8 @@ Footer
     text-decoration: none;
     font-size: small; 
     font-style: italic;
+    background-color: #97CADB;
+    color:black;
 }
 
 .footer-container > p > a:hover, 
@@ -217,10 +248,17 @@ Footer
 
 .built-by{
     padding-left:10px;
+    background-color: #97CADB;
+    color:black;
 }
 
 #logo {
     font-size: medium;
+}
+
+#date {
+    background-color: #97CADB;
+    color:black;
 }
 
 /* Small Screens */
@@ -249,7 +287,7 @@ Entry Form
 */
 .entry-container {
     display: none;
-    border: 1px solid green;
+    border: 1px solid #97CADB;
     position: absolute;
     background-color: white;
     padding: 30px;
