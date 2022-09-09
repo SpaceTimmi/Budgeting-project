@@ -4,7 +4,7 @@ let content;
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         let displayName = (user.displayName!=null?user.displayName:user.email)
-        content = `<a href="login.html" class="navText" id="logged-in">Logged in as: <span style="font-size:12px">${displayName}</span></a>
+        content = `<a href="login.html" class="navText" id="logged-in">Logged in as: <span id="username"style="font-size:12px">${displayName}</span></a>
         <div class="dropdown-content">
             <span class="navText" id="logout-btn">Log out</span>
         </div>`;

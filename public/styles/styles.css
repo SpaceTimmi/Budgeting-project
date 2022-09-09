@@ -205,6 +205,13 @@ Navigation
     color:black;
 }
 
+#logout-btn {
+    background-color: white;
+}
+#username{
+    background-color: #97CADB;
+    color:black;
+}
 /*
 =============================================
 Footer
