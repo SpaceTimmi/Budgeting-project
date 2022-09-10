@@ -154,6 +154,15 @@ Sign Up and Login Page
 
 /* Small Screens */
 
+@media screen and (max-width:1000px) {
+    .input-field, .sub-container {
+        width: auto;
+    }
+    #intro--, .input-field, .personalizedLabel {
+        font-size: large;
+    }
+}
+
 
 
 /*
