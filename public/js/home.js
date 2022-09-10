@@ -1,3 +1,6 @@
+// Getting the cards (container) and the list of cards.
+const cards = document.getElementById("cards");
+const cardList = document.getElementById("card-list");
 
 // start test to list users
 firebase.auth().onAuthStateChanged((user) => {
@@ -13,6 +16,28 @@ firebase.auth().onAuthStateChanged((user) => {
     
     $entrycard.addEventListener("click", entryClicked) 
     entryListUI.append($entrycard);
+
+    /* Testing */
+    
+    let cardElement = document.createElement("li");
+    
+    let cardDate = date.toLocaleDateString();
+    let cardType =  entry.type; 
+    let cardCategory = entry.category
+    let cardDescription = entry.description
+    let cardAmount = entry.amount;
+
+    let cardC = `<div class="info-container">
+                    <p id="info">Due date: ${cardDate}</p>
+                    <p id="info">Type: ${cardType}</p>
+                    <p id="info">Category: ${cardCategory}</p>
+                    <p id="info">Amout: ${cardAmount}</p>
+                    <p id="info"> Description: ${cardDescription}</p>
+                  </div>`
+    cardElement.innerHTML = cardC;
+    cardList.append(cardElement);
+    
+    /* Testing */
 });
 
 function entryClicked(e) {

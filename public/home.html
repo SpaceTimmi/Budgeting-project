@@ -13,9 +13,10 @@
     <!--End firebase SDK set up-->
     <link rel="stylesheet" href="./styles/styles.css"/>
     <link rel="stylesheet" href="./styles/dropdown.css"/>
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
+    <div class="page-container">
     <!-- topNavBar -->
     <div class="top">
         <div class="navBar row">
@@ -28,11 +29,12 @@
             </div>
         </div>
     </div>
-    <div class="switch" onclick="darkMode()">Dark mode:              
-        <span id="inner-switch">OFF</span>
-    </div>
-
+ 
 	<div class="container main-content">
+        <div class="switch" onclick="darkMode()">Dark mode:              
+            <span id="inner-switch">OFF</span>
+        </div>
+
 		<div class="row">
 			<div class="intro col-12">
 				<h1>Budgeting</h1>
@@ -65,8 +67,10 @@
             </div>
 		</div>
         <div id="entryList"></div>
-        
-       
+        <div id="cards">
+            <ul id="card-list">
+            </ul>
+        </div>
 	</div>
     
      <footer class="footer-container">
@@ -83,6 +87,7 @@
             <a href="about.html" class="footer-nav-links">About</a>
         </div>
     </footer>
+    </div>
 	<script type="text/javascript" src="js/home.js"></script>
     <script type="text/javascript" src="js/dark-mode.js"></script>
 </body>

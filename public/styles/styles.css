@@ -324,9 +324,36 @@ Entry Form
     background-color: white;
 } */
 
-
 /*
 =============================================
-About page
+Cards (Testing)
 =============================================
 */
+#info {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: #018ABE;
+}
+
+#card-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+}
+
+ul {
+    list-style: none;
+}
+
+.info-container {
+    padding: 3rem;
+    border: 2px solid white;
+    border-radius: 2rem;
+    background-color: #018ABE;
+}
+
+.info-container:hover {
+    cursor: pointer;
+    border: 5rem;
+    color: white;
+}
