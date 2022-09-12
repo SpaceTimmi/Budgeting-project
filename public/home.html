@@ -13,13 +13,13 @@
     <!--End firebase SDK set up-->
     <link rel="stylesheet" href="./styles/styles.css"/>
     <link rel="stylesheet" href="./styles/dropdown.css"/>
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
     <!-- topNavBar -->
     <div class="top">
         <div class="navBar row">
-            <div class="col navElement siteName">Placeholder</div>
+            <div class="col navElement siteName"><a href="home.html">BudgetPlanner</a></div>
             <div class="col navLinks">
                 <div class="col navElement" id="home"><a href="home.html" class="navText">Home</a></div>
                 <div class="col navElement" id="about"><a href="about.html" class="navText">About</a></div>
@@ -28,11 +28,12 @@
             </div>
         </div>
     </div>
-    <div class="switch" onclick="darkMode()">Dark mode:              
-        <span id="inner-switch">OFF</span>
-    </div>
+ 
+	<div class="container">
+        <div class="switch" onclick="darkMode()">Dark mode:              
+            <span id="inner-switch">OFF</span>
+        </div>
 
-	<div class="container main-content">
 		<div class="row">
 			<div class="intro col-12">
 				<h1>Budgeting</h1>
@@ -65,22 +66,25 @@
             </div>
 		</div>
         <div id="entryList"></div>
-        
-       
+        <div id="cards">
+            <ul id="card-list">
+            </ul>
+        </div>
 	</div>
-    
      <footer class="footer-container">
-        <p class="built-by">
-            &copy; <span id="date">2022</span>
-            <a href="home.html" id="logo">BudgetPlanner</a> 
-            built by <a href="https://github.com/vy-b">Cola</a> and 
-            <a href="https://github.com/spacetimmi">SpaceTimmi</a>
-        </p>
-        <div class="footer-nav">
-            <a href="home.html" class="footer-nav-links">Home</a>
-            <a href="login.html" class="footer-nav-links">Log In</a>
-            <a href="signup.html" class="footer-nav-links">Sign Up</a>
-            <a href="about.html" class="footer-nav-links">About</a>
+        <div class="footer-sub-container">
+            <p class="built-by">
+                &copy; <span id="date">2022</span>
+                <a href="home.html" id="logo">BudgetPlanner</a> 
+                built by <a href="https://github.com/vy-b">Cola</a> and 
+                <a href="https://github.com/spacetimmi">SpaceTimmi</a>
+            </p>
+            <div class="footer-nav">
+                <a href="home.html" class="footer-nav-links">Home</a>
+                <a href="login.html" class="footer-nav-links">Log In</a>
+                <a href="signup.html" class="footer-nav-links">Sign Up</a>
+                <a href="about.html" class="footer-nav-links">About</a>
+            </div>
         </div>
     </footer>
 	<script type="text/javascript" src="js/home.js"></script>

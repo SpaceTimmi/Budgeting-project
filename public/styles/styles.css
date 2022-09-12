@@ -11,14 +11,20 @@ body {
     margin:0;
 }
 .main-content{
-    justify-content: center;
-    display: flex;
+    display: inline-block;
     text-align: center;
+    min-height: calc(100vh - 30px);
 }
 
+/* For login and sign up form*/
 .container {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center ;
+    min-height: calc(100vh - 30px);
 }
+
 .dark,
 .dark * {
     background-color: #001B48;
@@ -27,7 +33,7 @@ body {
 }
 
 .switch {
-    align-self: flex-end;
+    align-self: center ;
     margin: 0.9375rem;
 }
 #inner-switch {
@@ -108,7 +114,6 @@ Sign Up and Login Page
     border-bottom:solid thin;
     padding: 5px;
     margin: 2px;
-    /* */
     width: 400px ;
 }
 
@@ -146,6 +151,11 @@ Sign Up and Login Page
 
 
 .sub-container {
+    display:  flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
     margin-top: 1rem; 
     padding: 2rem 4rem;
     border: 2px solid #97CADB;
@@ -153,6 +163,15 @@ Sign Up and Login Page
 }
 
 /* Small Screens */
+
+@media screen and (max-width:1000px) {
+    .input-field, .sub-container {
+        width: auto;
+    }
+    #intro--, .input-field, .personalizedLabel {
+        font-size: large;
+    }
+}
 
 
 
@@ -166,6 +185,7 @@ Navigation
     top: 0;
     position:absolute;
     width:100%;
+    height: 10px;
 }
 .siteName {
     font-size:25px;
@@ -220,9 +240,12 @@ Footer
 
 /* Large Screens */
 .footer-container {
+    height: 20px; 
+}
+.footer-sub-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    position: absolute;
+    position: inherit; 
     bottom: 0;
     width: 100vw;
     background-color: #97CADB;
@@ -239,7 +262,7 @@ Footer
     color:black;
 }
 
-.footer-container > p > a, 
+.footer-sub-container > p > a, 
 .footer-nav-links {
     text-decoration: none;
     font-size: small; 
@@ -248,7 +271,7 @@ Footer
     color:black;
 }
 
-.footer-container > p > a:hover, 
+.footer-sub-container > p > a:hover, 
 .footer-nav-links:hover {
     color: black;
 }
@@ -286,7 +309,6 @@ Footer
 }
 
 
-
 /*
 =============================================
 Entry Form
@@ -298,26 +320,65 @@ Entry Form
     position: absolute;
     transform: translateX(-50%);
     left: 50%;
-    padding: 30px;
-    border-radius: 5px;
+    padding: 3rem;
+    border-radius: 2rem;
     text-align: left;
+}
+
+.entryInput{
+    width: 300px;
 }
 
 /* .entry-title{
     background-color: white;
 }
 
-.entryInput{
-    background-color: white;
-}
+
 
 .entry-item{
     background-color: white;
 } */
 
-
 /*
 =============================================
-About page
+Cards (Testing)
 =============================================
 */
+#info {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: #018ABE;
+}
+
+#card-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+}
+
+ul {
+    list-style: none;
+}
+
+.info-container {
+    padding: 3rem;
+    border: 2px solid white;
+    border-radius: 2rem;
+    background-color: #018ABE;
+}
+
+.info-container:hover {
+    cursor: pointer;
+    border: 5rem;
+    color: white;
+}
+
+/* Small Screens */
+@media screen and (max-width:1000px) {
+    .info-container {
+        padding: 1rem;
+    }
+    #card-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
