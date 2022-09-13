@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.9.2/firebase-database-compat.js"></script>
     <script src="js/setup_firebase.js"></script>
     <!--End firebase SDK set up-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./styles/styles.css"/>
     <link rel="stylesheet" href="./styles/dropdown.css"/>
     <title>Home</title>
@@ -35,11 +36,26 @@
         </div>
 
 		<div class="row">
-			<div class="intro col-12">
-				<h1>Budgeting</h1>
+			<div class="intro col-12" id="homepage">
+                <div class="my-header">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span id="year-header">Budgeting</span>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </div>
+				
+                <div class="my-header">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span id="month-header"></span>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </div>
+                
                 <button id="getStarted" class="large-btn" onclick="openForm()">Add new entry...</button>
 			</div>
             <div class="entry-container" id="entry-form" style="background-color:white">
+                <div>
+                    <p>Date</p>
+                    <input type="date" id="entry-date">
+                </div>
                 <div>
                     <p>Amount</p>
                     <input class="entryInput" id="amount" type="number" placeholder="Enter amount">
@@ -55,8 +71,8 @@
                 <div>
                     <p>Income/Expense</p>
                     <select class="entryInput" id="type">
-                        <option value="income">Income</option>
                         <option value="expense">Expense</option>
+                        <option value="income">Income</option>
                     </select>
                 </div>
                 <div>
