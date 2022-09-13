@@ -1,62 +1,67 @@
 // Getting the cards (container) and the list of cards.
 const cards = document.getElementById("cards");
 const cardList = document.getElementById("card-list");
-
+let currentDate = new Date();
 // start test to list users
-firebase.auth().onAuthStateChanged((user) => {
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().toLocaleString("default", { month: "long" });
-  const entriesRef = firebase
-    .database()
-    .ref("budget_entry/" + user.uid + "/" + currentYear); // gets all entries for the current year
-  // first look into all the entries in the current year created by logged in user
-  // to implement: navigate to last year, next year, etc.
-  entriesRef.get().then((snap) => {
-    const header = document.getElementById("year-header");
-    header.innerText = snap.key;
-    // then look into entries in current month
-    // to implement: navigate to last month, next month, etc.
-    const entriesByMonth = firebase
+
+fetchEntries();
+
+function fetchEntries(){
+  cardList.innerHTML = "";
+  firebase.auth().onAuthStateChanged((user) => {
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.toLocaleString("default", { month: "long" });
+    const entriesRef = firebase
       .database()
-      .ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth);
-    entriesByMonth.on("child_added", (snap) => {
-      const month = document.getElementById("month-header");
-      month.textContent = currentMonth;
-      const currentDate = snap.key;
-      let dateCard = document.createElement("div");
-      dateCard.setAttribute("class", "info-container");
-      let cardTitle = document.createElement("div");
-      cardTitle.innerHTML = `<div class="card-title">${currentDate}</div>`;
-      dateCard.append(cardTitle);
-      const entriesByDate = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth + "/" + snap.key);
-      entriesByDate.on("child_added", (snap) => {
-        let entry = snap.val();
-        console.log(entry);
-        /* Testing */
+      .ref("budget_entry/" + user.uid + "/" + currentYear); // gets all entries for the current year
+    // first look into all the entries in the current year created by logged in user
+    // to implement: navigate to last year, next year, etc.
+    entriesRef.get().then((snap) => {
+      const header = document.getElementById("year-header");
+      header.innerText = snap.key;
+      // then look into entries in current month
+      // to implement: navigate to last month, next month, etc.
+      const entriesByMonth = firebase
+        .database()
+        .ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth);
+        const month = document.getElementById("month-header");
+        month.textContent = currentMonth;
+      entriesByMonth.on("child_added", (snap) => {
+        const dateTitle = snap.key;
+        let dateCard = document.createElement("div");
+        dateCard.setAttribute("class", "info-container");
+        let cardTitle = document.createElement("div");
+        cardTitle.innerHTML = `<div class="card-title">${dateTitle}</div>`;
+        dateCard.append(cardTitle);
+        const entriesByDate = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth + "/" + snap.key);
+        entriesByDate.on("child_added", (snap) => {
+          let entry = snap.val();
+          console.log(entry);
+          /* Testing */
 
-        let cardElement = document.createElement("li");
+          let cardElement = document.createElement("li");
 
-        let cardType = entry.type;
-        let cardCategory = entry.category;
-        let cardDescription = entry.description;
-        let cardAmount = entry.amount;
+          let cardType = entry.type;
+          let cardCategory = entry.category;
+          let cardDescription = entry.description;
+          let cardAmount = entry.amount;
 
-        let cardC = `<div class="inner-info">
-                        <p id="info">Type: ${cardType}</p>
-                        <p id="info">Category: ${cardCategory}</p>
-                        <p id="info">Amount: ${cardAmount}</p>
-                        <p id="info"> Description: ${cardDescription}</p>
-                      </div>`;
-        cardElement.innerHTML = cardC;
-        dateCard.append(cardElement);
-        cardList.append(dateCard);
+          let cardC = `<div class="inner-info">
+                          <p id="info">Type: ${cardType}</p>
+                          <p id="info">Category: ${cardCategory}</p>
+                          <p id="info">Amount: ${cardAmount}</p>
+                          <p id="info"> Description: ${cardDescription}</p>
+                        </div>`;
+          cardElement.innerHTML = cardC;
+          dateCard.append(cardElement);
+          cardList.append(dateCard);
 
-        /* Testing */
+          /* Testing */
+        });
       });
     });
   });
-});
-
+}
 function openForm() {
   document.getElementById("entry-form").style.display = "block";
 }
@@ -140,4 +145,24 @@ function getYearMonth(date) {
   const year = new Date(date).getFullYear();
   const month = new Date(date).toLocaleString("default", { month: "long" });
   return year + "/" + month;
+}
+
+function lastMonth(){
+  currentDate = new Date(currentDate.setMonth(currentDate.getMonth()-1));
+  fetchEntries();
+}
+
+function nextMonth(){
+  currentDate = new Date(currentDate.setMonth(currentDate.getMonth()+1));
+  fetchEntries();
+}
+
+function lastYear(){
+  currentDate = new Date(currentDate.setFullYear(currentDate.getFullYear()-1));
+  fetchEntries();
+}
+
+function nextYear(){
+  currentDate = new Date(currentDate.setFullYear(currentDate.getFullYear()+1));
+  fetchEntries();
 }
