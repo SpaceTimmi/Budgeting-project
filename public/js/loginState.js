@@ -10,6 +10,8 @@ firebase.auth().onAuthStateChanged(function(user) {
         </div>`;
     } else {
         content = '<a href="login.html" class="navText" id="logged-out">Login/Sign Up</a>';
+        let home = document.getElementById("homepage");
+        home.innerHTML=`<h1>Budgeting app</h1><p>Login to get started</p>`;
         // User is signed out.
         // ...
     }
