@@ -3,10 +3,10 @@ const cards = document.getElementById("cards");
 const cardList = document.getElementById("card-list");
 let currentDate = new Date();
 // start test to list users
-
 fetchEntries();
 
 function fetchEntries(){
+  
   cardList.innerHTML = "";
   firebase.auth().onAuthStateChanged((user) => {
     const currentYear = currentDate.getFullYear();
@@ -26,38 +26,41 @@ function fetchEntries(){
         .ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth);
         const month = document.getElementById("month-header");
         month.textContent = currentMonth;
-      entriesByMonth.on("child_added", (snap) => {
-        const dateTitle = snap.key;
-        let dateCard = document.createElement("div");
-        dateCard.setAttribute("class", "info-container");
-        let cardTitle = document.createElement("div");
-        cardTitle.innerHTML = `<div class="card-title">${dateTitle}</div>`;
-        dateCard.append(cardTitle);
-        const entriesByDate = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth + "/" + snap.key);
-        entriesByDate.on("child_added", (snap) => {
-          let entry = snap.val();
-          console.log(entry);
-          /* Testing */
+      entriesByMonth.get().then((snap) => {
+        
+        for (let key of Object.keys(snap.val())){
+          const dateTitle = key;
+          let dateCard = document.createElement("div");
+          dateCard.setAttribute("class", "info-container");
+          let cardTitle = document.createElement("div");
+          cardTitle.innerHTML = `<div class="card-title">${dateTitle}</div>`;
+          dateCard.append(cardTitle);
+          const entriesByDate = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth + "/" + key);
+          entriesByDate.on("child_added", (snap) => {
+            let entry = snap.val();
+            /* Testing */
 
-          let cardElement = document.createElement("li");
+            let cardElement = document.createElement("li");
 
-          let cardType = entry.type;
-          let cardCategory = entry.category;
-          let cardDescription = entry.description;
-          let cardAmount = entry.amount;
+            let cardType = entry.type;
+            let cardCategory = entry.category;
+            let cardDescription = entry.description;
+            let cardAmount = entry.amount;
 
-          let cardC = `<div class="inner-info">
-                          <p id="info">Type: ${cardType}</p>
-                          <p id="info">Category: ${cardCategory}</p>
-                          <p id="info">Amount: ${cardAmount}</p>
-                          <p id="info"> Description: ${cardDescription}</p>
-                        </div>`;
-          cardElement.innerHTML = cardC;
-          dateCard.append(cardElement);
-          cardList.append(dateCard);
+            let cardC = `<div class="inner-info">
+                            <p id="info">Type: ${cardType}</p>
+                            <p id="info">Category: ${cardCategory}</p>
+                            <p id="info">Amount: ${cardAmount}</p>
+                            <p id="info"> Description: ${cardDescription}</p>
+                          </div>`;
+            cardElement.innerHTML = cardC;
+            dateCard.append(cardElement);
+            cardList.append(dateCard);
 
-          /* Testing */
-        });
+            /* Testing */
+          })
+        
+        };
       });
     });
   });
@@ -127,6 +130,7 @@ document.querySelectorAll(".entryInput").forEach((item) => {
   item.addEventListener("keypress", (event) => {
     if (verifyInputs() && event.which === 13) {
       writeToBudgetEntry();
+      closeForm();
     }
   });
 });
