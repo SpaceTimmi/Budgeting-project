@@ -11,9 +11,7 @@ function fetchEntries(){
   firebase.auth().onAuthStateChanged((user) => {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.toLocaleString("default", { month: "long" });
-    const entriesRef = firebase
-      .database()
-      .ref("budget_entry/" + user.uid + "/" + currentYear); // gets all entries for the current year
+    const entriesRef = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear); // gets all entries for the current year
     // first look into all the entries in the current year created by logged in user
     // to implement: navigate to last year, next year, etc.
     entriesRef.get().then((snap) => {
@@ -21,50 +19,66 @@ function fetchEntries(){
       header.innerText = snap.key;
       // then look into entries in current month
       // to implement: navigate to last month, next month, etc.
-      const entriesByMonth = firebase
-        .database()
-        .ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth);
+      const entriesByMonth = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth);
         const month = document.getElementById("month-header");
         month.textContent = currentMonth;
-      entriesByMonth.get().then((snap) => {
-        
-        for (let key of Object.keys(snap.val())){
-          const dateTitle = key;
-          let dateCard = document.createElement("div");
-          dateCard.setAttribute("class", "info-container");
-          let cardTitle = document.createElement("div");
+        let prevDate = ""
+        let dateContainer = document.createElement("div");
+        let cardTitle = document.createElement("div");
+      entriesByMonth.on('child_added',(snap)=>{
+        let entry = snap.val();
+        const dateTitle = entry.date;
+        if (prevDate==""||dateTitle!=prevDate){
+          dateContainer = document.createElement("div");
+          cardTitle = document.createElement("div");
           cardTitle.innerHTML = `<div class="card-title">${dateTitle}</div>`;
-          dateCard.append(cardTitle);
-          const entriesByDate = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth + "/" + key);
-          entriesByDate.on("child_added", (snap) => {
-            let entry = snap.val();
-            /* Testing */
+          dateContainer.append(cardTitle);
+        }
+        prevDate = entry.date;
 
-            let cardElement = document.createElement("li");
+        let entryCard = document.createElement("li");
 
-            let cardType = entry.type;
-            let cardCategory = entry.category;
-            let cardDescription = entry.description;
-            let cardAmount = entry.amount;
-
-            let cardC = `<div class="inner-info">
-                            <p id="info">Type: ${cardType}</p>
-                            <p id="info">Category: ${cardCategory}</p>
-                            <p id="info">Amount: ${cardAmount}</p>
-                            <p id="info"> Description: ${cardDescription}</p>
-                          </div>`;
-            cardElement.innerHTML = cardC;
-            dateCard.append(cardElement);
-            cardList.append(dateCard);
-
-            /* Testing */
-          })
+        let cardType = entry.type;
+        let cardCategory = entry.category;
+        let cardDescription = entry.description;
+        let cardAmount = entry.amount;
         
-        };
-      });
+        let cardC = document.createElement("div");
+        cardC.setAttribute('class','info-container');
+
+        if (cardType==="Income"){
+          cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
+                        <p id="type-info">${cardType}</p>
+                        <p id="amount-info" style="color: darkgreen">$${cardAmount}</p>
+                        <p id="desc-info">${cardDescription}</p>`;
+        }
+        else {
+          cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
+                        <p id="type-info">${cardType}</p>
+                        <p id="amount-info" style="color: #900603">$${cardAmount}</p>
+                        <p id="desc-info">${cardDescription}</p>`;
+        }
+        
+        
+        entryCard.append(cardC);
+        // append each entry under their date header
+        dateContainer.append(entryCard);
+        // append all entries from the given date to the cardlist
+        cardList.append(dateContainer);
+        if (cardType === 'Income') {
+          document.getElementById("amount-info").style.color="#900603";
+        }
+        else{
+          document.getElementById("amount-info").style.color="darkgreen";
+        }
+        /* Testing */
+      })
+        
     });
   });
 }
+
+// test
 function openForm() {
   document.getElementById("entry-form").style.display = "block";
 }
@@ -76,8 +90,7 @@ function closeForm() {
 // Getting Inputs
 
 const entryDate = document.getElementById("entry-date");
-entryDate.valueAsDate = new Date(new Date().toLocaleDateString()); // creates Date object in local time, set default value
-
+entryDate.valueAsDate = new Date(); // creates Date object in local time, set default value
 const amount = document.getElementById("amount");
 const category = document.getElementById("category");
 const description = document.getElementById("description");
@@ -89,11 +102,11 @@ function writeToBudgetEntry() {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const yearMonth = getYearMonth(entryDate.value); // such as "2022/Sep"
+      const yearMonth = getYearMonth(entryDate.valueAsDate); // such as "2022/Sep"
       let budgetRef = firebase
         .database()
         .ref(
-          "budget_entry/" + user.uid + "/" + yearMonth + "/" + entryDate.value
+          "budget_entry/" + user.uid + "/" + yearMonth
         );
       budgetRef.push().set({
         amount: amount.value,
@@ -146,8 +159,12 @@ function verifyInputs() {
 }
 
 function getYearMonth(date) {
-  const year = new Date(date).getFullYear();
-  const month = new Date(date).toLocaleString("default", { month: "long" });
+  const year = date.getUTCFullYear();
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+  ];
+
+  const month = monthNames[date.getUTCMonth()];
   return year + "/" + month;
 }
 
