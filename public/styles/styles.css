@@ -10,6 +10,9 @@ body {
     padding-top:5vh;
     margin:0;
 }
+p{
+    margin:0;
+}
 .main-content{
     display: inline-block;
     text-align: center;
@@ -374,6 +377,15 @@ Cards (Testing)
     margin-bottom: 0;
     background-color: #018ABE;
 }
+#category-info{
+    font-size:3vh;
+}
+#amount-info{
+    font-size:3vh;
+}
+#type-info{
+    color:#697A98
+}
 
 #card-list {
     display: block;
@@ -392,8 +404,12 @@ ul {
     padding: 3rem;
     border: 2px solid white;
     border-radius: 2rem;
-    background-color: #018ABE;
+    background-color: #8fc8eb;
     width:50vh;
+    column-count:2;
+    column-gap:35vh;
+    color:#001B48;
+    font-family:sans-serif;
 }
 .inner-info{
     margin-bottom:10px;
