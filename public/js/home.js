@@ -27,35 +27,36 @@ function fetchEntries(){
         const month = document.getElementById("month-header");
         month.textContent = currentMonth;
       entriesByMonth.get().then((snap) => {
-        
+
         for (let key of Object.keys(snap.val())){
           const dateTitle = key;
-          let dateCard = document.createElement("div");
-          dateCard.setAttribute("class", "info-container");
+          let dateContainer = document.createElement("div");
           let cardTitle = document.createElement("div");
           cardTitle.innerHTML = `<div class="card-title">${dateTitle}</div>`;
-          dateCard.append(cardTitle);
+          dateContainer.append(cardTitle);
           const entriesByDate = firebase.database().ref("budget_entry/" + user.uid + "/" + currentYear + "/" + currentMonth + "/" + key);
           entriesByDate.on("child_added", (snap) => {
             let entry = snap.val();
             /* Testing */
 
-            let cardElement = document.createElement("li");
+            let entryCard = document.createElement("li");
 
             let cardType = entry.type;
             let cardCategory = entry.category;
             let cardDescription = entry.description;
             let cardAmount = entry.amount;
 
-            let cardC = `<div class="inner-info">
+            let cardC = `<div class="info-container">
                             <p id="info">Type: ${cardType}</p>
                             <p id="info">Category: ${cardCategory}</p>
                             <p id="info">Amount: ${cardAmount}</p>
                             <p id="info"> Description: ${cardDescription}</p>
                           </div>`;
-            cardElement.innerHTML = cardC;
-            dateCard.append(cardElement);
-            cardList.append(dateCard);
+            entryCard.innerHTML = cardC;
+            // append each entry under their date header
+            dateContainer.append(entryCard);
+            // append all entries from the given date to the cardlist
+            cardList.append(dateContainer);
 
             /* Testing */
           })
@@ -65,6 +66,8 @@ function fetchEntries(){
     });
   });
 }
+
+// test
 function openForm() {
   document.getElementById("entry-form").style.display = "block";
 }
