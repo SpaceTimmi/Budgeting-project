@@ -46,19 +46,12 @@ function fetchEntries(){
         let cardC = document.createElement("div");
         cardC.setAttribute('class','info-container');
 
-        if (cardType==="Income"){
-          cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
+        let cardTypeColor = (cardType === "Income") ? "darkgreen" : "#900603" 
+
+        cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
                         <p id="type-info">${cardType}</p>
-                        <p id="amount-info" style="color: darkgreen">$${cardAmount}</p>
+                        <p id="amount-info" style="color: ${cardTypeColor}">$${cardAmount}</p>
                         <p id="desc-info">${cardDescription}</p>`;
-        }
-        else {
-          cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
-                        <p id="type-info">${cardType}</p>
-                        <p id="amount-info" style="color: #900603">$${cardAmount}</p>
-                        <p id="desc-info">${cardDescription}</p>`;
-        }
-        
         
         entryCard.append(cardC);
         // append each entry under their date header
