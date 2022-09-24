@@ -422,6 +422,25 @@ ul {
     color: white;
 }
 
+.edit-and-delete {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+}
+.icon-pencil, .icon-trash {
+    font-size: large;
+}
+.icon-trash {
+    margin-left: 2rem;
+}
+.icon-trash:hover{
+    color: red;
+}
+.icon-pencil:hover{
+    color: blue;
+}
+
+
 /* Small Screens */
 @media screen and (max-width:1000px) {
     .info-container {
