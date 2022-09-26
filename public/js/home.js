@@ -3,6 +3,17 @@ const cards = document.getElementById("cards");
 const cardList = document.getElementById("card-list");
 let currentDate = new Date();
 // start test to list users
+
+const entryDate = document.getElementById("entry-date");
+entryDate.valueAsDate = new Date(); // creates Date object in local time, set default value
+const amount = document.getElementById("amount");
+const category = document.getElementById("category");
+const description = document.getElementById("description");
+const type = document.getElementById("type");
+const submitBtn = document.getElementById("add-btn");
+
+
+
 fetchEntries();
 
 function fetchEntries(){
@@ -54,7 +65,7 @@ function fetchEntries(){
                         </div>
                         <p id="category-info">${cardCategory}</p>
                         <p id="type-info">${cardType}</p>
-                        <p id="amount-info" style="color: ${cardTypeColor}">$${cardAmount}</p>
+                        <p id="amount-info" style="color: ${cardTypeColor}">${cardAmount}</p>
                         <p id="desc-info">${cardDescription}</p>`;
         
         entryCard.append(cardC);
@@ -64,15 +75,37 @@ function fetchEntries(){
         cardList.append(dateContainer);
         document.getElementById("amount-info").style.color=`${cardTypeColor}`;
         
+        const cardID = snap.key;
+        const cardRef = firebase.database().ref(`budget_entry/${user.uid}/${currentYear}/${currentMonth}/${cardID}`); 
 
         // Deleting a card.
         entryCard.querySelector('.icon-trash').addEventListener("click", () => {
-          // snap from entriesByMonth
-          const delId = snap.key 
-          const delRef = firebase.database().ref(`budget_entry/${user.uid}/${currentYear}/${currentMonth}/${delId}`); 
-          entryCard.innerHTML = "";
-          delRef.remove();
-          console.log("Successfully deleted");
+          deleteCard(cardRef, entryCard); 
+        });
+
+        // Editing a card.
+        entryCard.querySelector('.icon-pencil').addEventListener("click", () => {
+          // Changes the add btn to update btn, opens form and prefill form with inputs to be edited.
+          toogleOnUpdateBtn();
+          openForm();
+          preFillForm(entry);
+
+          // clearing form if cancel button is clicked.
+          document.getElementById('cancel-btn').addEventListener("click", () => {
+            clearForm();
+            toogleOffUpdateBtn();
+          });
+
+          // Writing entry to database if add button is clicked.
+          document.getElementById('update-btn').addEventListener("click", () => {
+            writeToBudgetEntry(true, cardID);
+            //deleteCard(cardRef, entryCard); 
+            //fetchEntries();
+            toogleOffUpdateBtn();
+            closeForm();
+            window.location.reload();
+          });
+
         });
 
       })
@@ -89,39 +122,40 @@ function closeForm() {
   document.getElementById("entry-form").style.display = "none";
 }
 // Wrting to budget entry
-// Getting Inputs
 
-const entryDate = document.getElementById("entry-date");
-entryDate.valueAsDate = new Date(); // creates Date object in local time, set default value
-const amount = document.getElementById("amount");
-const category = document.getElementById("category");
-const description = document.getElementById("description");
-const type = document.getElementById("type");
-const submitBtn = document.getElementById("add-btn");
-
-function writeToBudgetEntry() {
+function writeToBudgetEntry(toUpdate=false, entryId=null) {
   // When called this function writes to budget_entry.
+  // toUpdate is only true if the function that calles writeToBudget() intends to edit rather than create new.
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const yearMonth = getYearMonth(entryDate.valueAsDate); // such as "2022/Sep"
-      let budgetRef = firebase
-        .database()
-        .ref(
-          "budget_entry/" + user.uid + "/" + yearMonth
-        );
-      budgetRef.push().set({
-        amount: amount.value,
-        category: category.value,
-        date: entryDate.value,
-        description: description.value,
-        type: type.value,
+      const yearMonth =  getYearMonth(entryDate.valueAsDate); // such as "2022/Sep"
+
+      // If the caller of this function intends to update entry then the entry id is added to budgetRef.
+      let budgetRef =  toUpdate ? firebase.database().ref(`budget_entry/${user.uid}/${yearMonth}/${entryId}`) 
+                                : firebase.database().ref(`budget_entry/${user.uid}/${yearMonth}`); 
+
+      if (toUpdate) {
+        // Runs if the caller intended to update an entry rather than create a new entry.
+        budgetRef.update({
+          amount: amount.value,
+          category: category.value,
+          date: entryDate.value,
+          description: description.value,
+          type: type.value,
+        }) 
+      } else {
+        // Runs if the caller intended to create a new entry.
+        budgetRef.push().set({
+          amount: amount.value,
+          category: category.value,
+          date: entryDate.value,
+          description: description.value,
+          type: type.value,
       });
+      };
       // Reset input tags
-      amount.value = "";
-      category.value = "";
-      description.value = "";
-      type.value = "";
+      clearForm();
     }
   });
 }
@@ -155,6 +189,37 @@ document.querySelectorAll(".entryInput").forEach((item) => {
 
 
 //Helper function
+function deleteCard(ref, card) {
+  // ref    -> reference to the entry in the data base (eg. firebase.db().ref.(example/...))
+  // card   -> The onScreen card div to be deleted.
+  // return type -> Boolean (true if successful else false)
+  try {
+    card.innerHTML = "";
+    ref.remove();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function preFillForm(entry) {
+  // Populates form with inputs to be edited.
+  category.value = entry.category;
+  description.value = entry.description;
+  amount.value = entry.amount;
+  type.value = entry.type;
+  entryDate.value = entry.date;
+}
+
+function clearForm() {
+  // Clears the form inputs.
+  category.value = "";
+  description.value = "";
+  amount.value = "";
+  type.value = "";
+  entryDate.value = "";
+}
+
 function verifyInputs() {
   // Returns true if all inputs have been filled, false otherwise.
   let arr = [amount, category, description, type];
@@ -192,4 +257,16 @@ function lastYear(){
 function nextYear(){
   currentDate = new Date(currentDate.setFullYear(currentDate.getFullYear()+1));
   fetchEntries();
+}
+
+function toogleOnUpdateBtn() {
+  // This adds the update button
+    document.getElementById("add-btn").style.display = "none";
+    document.getElementById("update-btn").style.display = "inline-block";
+}
+
+function toogleOffUpdateBtn() {
+  // This removes the update button
+    document.getElementById("add-btn").style.display = "inline-block";
+    document.getElementById("update-btn").style.display = "none";
 }
