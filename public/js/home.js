@@ -46,34 +46,36 @@ function fetchEntries(){
         let cardC = document.createElement("div");
         cardC.setAttribute('class','info-container');
 
-        if (cardType==="Income"){
-          cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
+        let cardTypeColor = (cardType === "Income") ? "darkgreen" : "#900603" 
+
+        cardC.innerHTML=`<div class="edit-and-delete">
+                          <i class="icon-fixed-width icon-pencil"></i> 
+                          <i class="icon-fixed-width icon-trash"></i>        
+                        </div>
+                        <p id="category-info">${cardCategory}</p>
                         <p id="type-info">${cardType}</p>
-                        <p id="amount-info" style="color: darkgreen">$${cardAmount}</p>
+                        <p id="amount-info" style="color: ${cardTypeColor}">$${cardAmount}</p>
                         <p id="desc-info">${cardDescription}</p>`;
-        }
-        else {
-          cardC.innerHTML=`<p id="category-info">${cardCategory}</p>
-                        <p id="type-info">${cardType}</p>
-                        <p id="amount-info" style="color: #900603">$${cardAmount}</p>
-                        <p id="desc-info">${cardDescription}</p>`;
-        }
-        
         
         entryCard.append(cardC);
         // append each entry under their date header
         dateContainer.append(entryCard);
         // append all entries from the given date to the cardlist
         cardList.append(dateContainer);
-        if (cardType === 'Income') {
-          document.getElementById("amount-info").style.color="#900603";
-        }
-        else{
-          document.getElementById("amount-info").style.color="darkgreen";
-        }
-        /* Testing */
-      })
+        document.getElementById("amount-info").style.color=`${cardTypeColor}`;
         
+
+        // Deleting a card.
+        entryCard.querySelector('.icon-trash').addEventListener("click", () => {
+          // snap from entriesByMonth
+          const delId = snap.key 
+          const delRef = firebase.database().ref(`budget_entry/${user.uid}/${currentYear}/${currentMonth}/${delId}`); 
+          entryCard.innerHTML = "";
+          delRef.remove();
+          console.log("Successfully deleted");
+        });
+
+      })
     });
   });
 }
@@ -147,6 +149,10 @@ document.querySelectorAll(".entryInput").forEach((item) => {
     }
   });
 });
+
+
+
+
 
 //Helper function
 function verifyInputs() {
